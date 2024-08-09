@@ -39,8 +39,14 @@ class Connection extends EventEmitter {
     var self = this
 
     this._connecting = true
-    this.stream.setNoDelay(true)
-    this.stream.connect(port, host)
+//    this.stream.setNoDelay(true)
+//    this.stream.connect(port, host)
+
+    //this.stream.setNoDelay(true)
+    //this.stream.connect(port, host)
+
+    if (typeof this.stream.setNoDelay === 'function') this.stream.setNoDelay(true)
+    if (typeof this.stream.setNoDelay === 'function') this.stream.connect(port, host)
 
     this.stream.once('connect', function () {
       if (self._keepAlive) {
